@@ -135,21 +135,19 @@ button{border:none;outline:none;cursor:pointer;background:none;font-family:inher
 .m-sub-chip{flex-shrink:0;font-size:11px;padding:4px 11px;border-radius:12px;border:1px solid var(--gray-200);color:var(--gray-500);background:var(--white);cursor:pointer;white-space:nowrap;transition:all .15s}
 .m-sub-chip.active{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
 
-/* ── 分类浏览 ── */
-.m-cat-page{display:flex;flex:1;overflow:hidden}
+/* ── 分类浏览（UCD 重设计）── */
+.m-cat-view{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.m-cat-hd{background:var(--blue);height:50px;display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0}
+.m-cat-back{font-size:22px;color:#fff;cursor:pointer;flex-shrink:0}
+.m-cat-hd-title{font-size:16px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-cat-chips-bar{background:var(--white);border-bottom:1px solid var(--gray-100);flex-shrink:0;padding:0 8px}
+.m-cat-body{flex:1;overflow:hidden;display:flex}
 .m-l2{width:72px;background:var(--gray-50);border-right:1px solid var(--gray-200);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
 .m-l2::-webkit-scrollbar{display:none}
 .m-l2-item{padding:12px 8px;font-size:11px;color:var(--gray-400);line-height:1.4;border-left:2px solid transparent;cursor:pointer;text-align:center}
 .m-l2-item.active{color:var(--blue);font-weight:700;background:var(--white);border-left-color:var(--blue)}
 .m-l3{flex:1;overflow-y:auto;padding:10px 12px;-webkit-overflow-scrolling:touch}
 .m-l3::-webkit-scrollbar{display:none}
-.m-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
-.m-chip{font-size:11px;padding:5px 10px;border-radius:5px;border:1px solid var(--gray-200);color:var(--gray-600);background:var(--white);cursor:pointer}
-.m-chip.active{background:var(--blue-l);border-color:var(--blue);color:var(--blue);font-weight:600}
-.m-breadcrumb{display:flex;align-items:center;gap:4px;padding:8px 12px;background:var(--white);border-bottom:1px solid var(--gray-100);font-size:11px;flex-shrink:0;overflow:hidden}
-.m-breadcrumb span{color:var(--gray-400);white-space:nowrap}
-.m-breadcrumb span.cur{color:var(--blue);font-weight:600}
-.m-breadcrumb i{font-size:10px;color:var(--gray-300);flex-shrink:0}
 
 /* ── 搜索页 ── */
 .m-search-top{background:var(--white);padding:8px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;border-bottom:1px solid var(--gray-100)}

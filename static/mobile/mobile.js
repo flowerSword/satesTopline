@@ -266,17 +266,20 @@ const App = {
     if(!page) return;
 
     // 控制 topbar / cat-tabs / bnav 显隐
-    const showShell = h.startsWith('/home') || h.startsWith('/cat');
     const tabsEl = document.getElementById('m-cat-tabs');
     const subBarEl = document.getElementById('m-sub-cat-bar');
     const bnav = document.getElementById('m-bnav');
 
-    if(showShell){
+    if(h.startsWith('/home')){
       document.querySelector('.m-topbar').style.display='';
       tabsEl && (tabsEl.style.display='');
       bnav && (bnav.style.display='');
-      if(h.startsWith('/home')) this._renderSubCatBar();
-      else subBarEl && (subBarEl.style.display='none');
+      this._renderSubCatBar();
+    } else if(h.startsWith('/cat')){
+      document.querySelector('.m-topbar').style.display='none';
+      tabsEl && (tabsEl.style.display='none');
+      subBarEl && (subBarEl.style.display='none');
+      bnav && (bnav.style.display='');
     } else if(h.startsWith('/search')||h.startsWith('/upload')||h.startsWith('/favorites')||h.startsWith('/history')||h.startsWith('/profile')){
       document.querySelector('.m-topbar').style.display='none';
       tabsEl && (tabsEl.style.display='none');
@@ -511,19 +514,18 @@ const App = {
     if(!roots.length){ page.innerHTML='<div class="m-empty"><i class="ti ti-category"></i><span>暂无分类</span></div>'; return; }
 
     let selL1 = roots[0];
-    let selL2 = selL1.children && selL1.children[0] || null;
-    let selL3 = null;
+    let selL2 = null;  // id
+    let selL3 = null;  // id
 
     const render = async () => {
       const l2list = selL1.children || [];
-      const l3list = selL2 && selL2.children || [];
+      const selL2obj = selL2 ? l2list.find(c=>c.id===selL2) : null;
+      const l3list = selL2obj ? (selL2obj.children||[]) : [];
+      const catId = selL3 || selL2 || selL1.id;
 
       let matHtml = '<div class="m-loading"><i class="ti ti-loader"></i>加载中…</div>';
       try{
-        const r = await API.materials.list({
-          cat_id: selL3 ? selL3.id : (selL2 ? selL2.id : selL1.id),
-          page_size: 20, publish_status: 'online'
-        });
+        const r = await API.materials.list({ cat_id: catId, page_size: 20, publish_status: 'online' });
         const items = r.items || r || [];
         matHtml = items.length
           ? items.map(m=>`
@@ -543,58 +545,62 @@ const App = {
       }catch(_){}
 
       page.innerHTML = `
-        <div class="m-breadcrumb" id="m-bc">
-          <span>${esc(selL1.name)}</span>
-          ${selL2?`<i class="ti ti-chevron-right"></i><span class="cur">${esc(selL2.name)}</span>`:''}
-          ${selL3?`<i class="ti ti-chevron-right"></i><span class="cur">${esc(selL3.name)}</span>`:''}
-        </div>
-        <div class="m-cat-page" style="height:calc(100% - 38px)">
-          <div class="m-l2" id="m-l2">
-            ${roots.map(c=>`<div class="m-l2-item${c.id===selL1.id?' active':''}" data-l1="${c.id}">${esc(c.name)}</div>`).join('')}
+        <div class="m-cat-view">
+          <!-- 蓝色头部：返回 + 当前一级分类名 -->
+          <div class="m-cat-hd">
+            <i class="ti ti-arrow-left m-cat-back" id="m-cat-back"></i>
+            <span class="m-cat-hd-title">${esc(selL1.name)}</span>
           </div>
-          <div class="m-l3" id="m-l3">
-            ${l2list.length?`
-              <div class="m-chips" id="m-l2-chips">
-                ${l2list.map(c=>`<div class="m-chip${selL2&&c.id===selL2.id?' active':''}" data-l2="${c.id}">${esc(c.name)}</div>`).join('')}
-              </div>`:''}
+          <!-- 二级/三级分类筛选栏（全宽） -->
+          ${l2list.length?`
+          <div class="m-cat-chips-bar">
+            <div class="m-sub-chips">
+              <div class="m-sub-chip${!selL2?' active':''}" data-l2="">全部</div>
+              ${l2list.map(c=>`<div class="m-sub-chip${selL2===c.id?' active':''}" data-l2="${c.id}">${esc(c.name)}</div>`).join('')}
+            </div>
             ${l3list.length?`
-              <div class="m-chips" id="m-l3-chips">
-                <div class="m-chip${!selL3?' active':''}" data-l3="">全部</div>
-                ${l3list.map(c=>`<div class="m-chip${selL3&&c.id===selL3.id?' active':''}" data-l3="${c.id}">${esc(c.name)}</div>`).join('')}
-              </div>`:''}
-            <div id="m-mat-list">${matHtml}</div>
+            <div class="m-sub-chips" style="border-top:1px solid var(--gray-100)">
+              <div class="m-sub-chip${!selL3?' active':''}" data-l3="">全部</div>
+              ${l3list.map(c=>`<div class="m-sub-chip${selL3===c.id?' active':''}" data-l3="${c.id}">${esc(c.name)}</div>`).join('')}
+            </div>`:''}
+          </div>`:''}
+          <!-- 主体：左侧一级列表 + 右侧资料列表 -->
+          <div class="m-cat-body">
+            <div class="m-l2" id="m-l1-sidebar">
+              ${roots.map(c=>`<div class="m-l2-item${c.id===selL1.id?' active':''}" data-l1="${c.id}">${esc(c.name)}</div>`).join('')}
+            </div>
+            <div class="m-l3" id="m-mat-list">${matHtml}</div>
           </div>
         </div>`;
 
+      document.getElementById('m-cat-back').onclick = () => go('#/home');
+
       // L1 切换
-      page.querySelectorAll('.m-l2-item').forEach(el=>{
+      page.querySelectorAll('[data-l1]').forEach(el=>{
         el.onclick=()=>{
-          selL1=roots.find(c=>c.id===parseInt(el.dataset.l1))||selL1;
-          selL2=selL1.children&&selL1.children[0]||null;
-          selL3=null;
+          selL1 = roots.find(c=>c.id===parseInt(el.dataset.l1)) || selL1;
+          selL2 = null; selL3 = null;
           render();
         };
       });
       // L2 chip
       page.querySelectorAll('[data-l2]').forEach(el=>{
         el.onclick=()=>{
-          const all=(selL1.children||[]);
-          selL2=all.find(c=>c.id===parseInt(el.dataset.l2))||selL2;
-          selL3=null;
+          selL2 = el.dataset.l2 ? parseInt(el.dataset.l2) : null;
+          selL3 = null;
           render();
         };
       });
       // L3 chip
       page.querySelectorAll('[data-l3]').forEach(el=>{
         el.onclick=()=>{
-          if(!el.dataset.l3){selL3=null;}
-          else{const l3all=selL2&&selL2.children||[];selL3=l3all.find(c=>c.id===parseInt(el.dataset.l3))||null;}
+          selL3 = el.dataset.l3 ? parseInt(el.dataset.l3) : null;
           render();
         };
       });
       // 资料跳转
-      page.addEventListener('click',e=>{
-        const mi=e.target.closest('[data-mid]');
+      document.getElementById('m-mat-list').addEventListener('click', e=>{
+        const mi = e.target.closest('[data-mid]');
         if(mi) go('#/detail/'+mi.dataset.mid);
       });
     };
