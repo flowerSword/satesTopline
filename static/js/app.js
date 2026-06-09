@@ -2138,7 +2138,7 @@ Object.assign(App, {
               <option value="super_admin" ${u.role === 'super_admin' ? 'selected' : ''}>超级管理员</option>
             </select>
           </div>
-          ${isNew ? '<div class="form-group"><label>初始密码</label><input name="password" minlength="6" placeholder="留空则使用 123456"></div>' : ''}
+          ${isNew ? '<div class="form-group"><label>初始密码</label><input type="password" name="password" minlength="6" placeholder="留空则使用 123456"></div>' : ''}
           <div class="form-err" id="ue-err"></div>
         </form>
       `,
