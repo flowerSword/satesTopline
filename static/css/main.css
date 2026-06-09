@@ -449,20 +449,6 @@ textarea.form-control { min-height: 80px; resize: vertical; }
 .stat-card-value { font-size: 24px; font-weight: 700; color: var(--gray-900); }
 .stat-card-extra { font-size: 11px; color: var(--gray-400); margin-top: 4px; }
 
-/* Toast */
-.toast {
-    position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-    padding: 10px 20px; border-radius: var(--radius);
-    color: #fff; font-size: 13px; z-index: 9999;
-    box-shadow: var(--shadow-lg); animation: toast-in .25s;
-}
-.toast-success { background: var(--success); }
-.toast-error { background: var(--danger); }
-.toast-info { background: var(--gray-700); }
-@keyframes toast-in {
-    from { opacity: 0; transform: translate(-50%, -10px); }
-    to   { opacity: 1; transform: translate(-50%, 0); }
-}
 
 /* ============================================================
    移动端适配（企微 H5）
@@ -682,7 +668,7 @@ textarea.form-control { min-height: 80px; resize: vertical; }
 
 /* ----- Toast ----- */
 .toast-box { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 5000; display: flex; flex-direction: column; gap: 8px; }
-.toast { background: rgba(0,0,0,.85); color: #fff; padding: 8px 18px; border-radius: 6px; font-size: 14px; opacity: 0; transform: translateY(-8px); transition: all .2s; }
+.toast { position: static; background: rgba(0,0,0,.85); color: #fff; padding: 10px 22px; border-radius: 8px; font-size: 14px; white-space: nowrap; opacity: 0; transform: translateY(-8px); transition: all .2s; box-shadow: 0 4px 16px rgba(0,0,0,.22); }
 .toast.toast-show { opacity: 1; transform: translateY(0); }
 .toast.toast-ok { background: var(--success); }
 .toast.toast-err { background: var(--danger); }
