@@ -78,6 +78,59 @@ const App = {
     return list;
   },
 
+  _renderSubCatBar(){
+    const bar = document.getElementById('m-sub-cat-bar');
+    if(!bar) return;
+
+    if(!this.activeCat){
+      bar.style.display='none';
+      bar.innerHTML='';
+      return;
+    }
+
+    const l1 = this.cats.find(c=>c.id===this.activeCat);
+    const l2list = (l1&&l1.children)||[];
+
+    if(!l2list.length){
+      bar.style.display='none';
+      bar.innerHTML='';
+      return;
+    }
+
+    const selL2 = l2list.find(c=>c.id===this.activeL2)||null;
+    const l3list = selL2?(selL2.children||[]):[];
+
+    bar.style.display='';
+    bar.innerHTML=`
+      <div class="m-sub-chips">
+        <div class="m-sub-chip${!this.activeL2?' active':''}" data-l2="">全部</div>
+        ${l2list.map(c=>`<div class="m-sub-chip${this.activeL2===c.id?' active':''}" data-l2="${c.id}">${esc(c.name)}</div>`).join('')}
+      </div>
+      ${l3list.length?`
+      <div class="m-sub-chips" style="border-top:1px solid var(--gray-100)">
+        <div class="m-sub-chip${!this.activeL3?' active':''}" data-l3="">全部</div>
+        ${l3list.map(c=>`<div class="m-sub-chip${this.activeL3===c.id?' active':''}" data-l3="${c.id}">${esc(c.name)}</div>`).join('')}
+      </div>`:''}
+    `;
+
+    bar.querySelectorAll('[data-l2]').forEach(el=>{
+      el.onclick=()=>{
+        this.activeL2 = el.dataset.l2 ? parseInt(el.dataset.l2) : null;
+        this.activeL3 = null;
+        this._renderSubCatBar();
+        this.viewHome();
+      };
+    });
+
+    bar.querySelectorAll('[data-l3]').forEach(el=>{
+      el.onclick=()=>{
+        this.activeL3 = el.dataset.l3 ? parseInt(el.dataset.l3) : null;
+        this._renderSubCatBar();
+        this.viewHome();
+      };
+    });
+  },
+
   catName(id){
     const c=this.catsFlat.find(x=>x.id===id);
     return c?c.name:'';
@@ -162,6 +215,7 @@ const App = {
           <div class="m-cat-tab active" data-cid="">全部</div>
           ${(this.cats||[]).map(c=>`<div class="m-cat-tab" data-cid="${c.id}" title="${esc(c.name)}">${esc(c.name.slice(0,4))}</div>`).join('')}
         </nav>
+        <div class="m-sub-cat-bar" id="m-sub-cat-bar" style="display:none"></div>
         <div class="m-scroll" id="m-page"></div>
         <nav class="m-bnav" id="m-bnav">
           <div class="m-bn" data-nav="home"><i class="ti ti-home on"></i><span class="on">首页</span></div>
@@ -182,6 +236,9 @@ const App = {
       document.querySelectorAll('.m-cat-tab').forEach(t=>t.classList.remove('active'));
       tab.classList.add('active');
       this.activeCat = tab.dataset.cid ? parseInt(tab.dataset.cid) : null;
+      this.activeL2 = null;
+      this.activeL3 = null;
+      this._renderSubCatBar();
       go('#/home');
       this.viewHome();
     });
@@ -211,19 +268,24 @@ const App = {
     // 控制 topbar / cat-tabs / bnav 显隐
     const showShell = h.startsWith('/home') || h.startsWith('/cat');
     const tabsEl = document.getElementById('m-cat-tabs');
+    const subBarEl = document.getElementById('m-sub-cat-bar');
     const bnav = document.getElementById('m-bnav');
 
     if(showShell){
       document.querySelector('.m-topbar').style.display='';
       tabsEl && (tabsEl.style.display='');
       bnav && (bnav.style.display='');
+      if(h.startsWith('/home')) this._renderSubCatBar();
+      else subBarEl && (subBarEl.style.display='none');
     } else if(h.startsWith('/search')||h.startsWith('/upload')||h.startsWith('/favorites')||h.startsWith('/history')||h.startsWith('/profile')){
       document.querySelector('.m-topbar').style.display='none';
       tabsEl && (tabsEl.style.display='none');
+      subBarEl && (subBarEl.style.display='none');
       bnav && (bnav.style.display = (h.startsWith('/favorites')||h.startsWith('/profile')) ? '' : 'none');
     } else {
       document.querySelector('.m-topbar').style.display='none';
       tabsEl && (tabsEl.style.display='none');
+      subBarEl && (subBarEl.style.display='none');
       bnav && (bnav.style.display='none');
     }
 
@@ -261,7 +323,8 @@ const App = {
     page.innerHTML = `<div class="m-loading"><i class="ti ti-loader" style="animation:spin 1s linear infinite"></i>加载中…</div>`;
 
     try{
-      const catFilter = this.activeCat ? {cat_id: this.activeCat} : {};
+      const effectiveCatId = this.activeL3 || this.activeL2 || this.activeCat || null;
+      const catFilter = effectiveCatId ? {cat_id: effectiveCatId} : {};
       const [anns, hot, recent] = await Promise.all([
         API.ops.anns({active:true}).catch(()=>[]),
         API.ops.hot({days:7, limit:15}).catch(()=>[]),
