@@ -36,23 +36,24 @@ const App = {
       this.renderLogin();
       return;
     }
+    await this._loadCats();
+    this.render();
+    window.addEventListener('hashchange', ()=>this.route());
+    this.route();
+  },
+
+  async _loadCats(){
     try{
       const tree = await API.cats.tree();
-      // tree 可能是 array 或 { list:[] } 或 { data:[] }
       let cats = [];
       if(Array.isArray(tree)) cats = tree;
       else if(tree && Array.isArray(tree.list)) cats = tree.list;
       else if(tree && Array.isArray(tree.data)) cats = tree.data;
       else if(tree && Array.isArray(tree.children)) cats = tree.children;
-      // 只取一级分类（parent_id 为 null/undefined）
       this.cats = cats.filter(c => c.parent_id === null || c.parent_id === undefined || c.level === 1);
-      // 若过滤后为空则用全部（兼容不同后端格式）
       if(!this.cats.length) this.cats = cats;
       this.catsFlat = this._flatCats(cats);
     }catch(e){ console.error('分类加载失败', e); }
-    this.render();
-    window.addEventListener('hashchange', ()=>this.route());
-    this.route();
   },
 
   _refreshCatTabs(){
@@ -133,6 +134,7 @@ const App = {
       btn.disabled = true; btn.textContent = '登录中…';
       try {
         this.user = await API.auth.login(username, pwd);
+        await this._loadCats();
         this.render();
         window.addEventListener('hashchange', ()=>this.route());
         this.route();
