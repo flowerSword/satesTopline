@@ -47,9 +47,11 @@ def init_db():
     with open(os.path.join(sql_dir, 'schema.sql'), 'r', encoding='utf-8') as f:
         db.executescript(f.read())
 
-    # 仅当 users 表为空时灌入种子数据（避免重复初始化）
-    cursor = db.execute('SELECT COUNT(*) FROM users')
-    if cursor.fetchone()[0] == 0:
+    # users 为空 或 一级分类为空时，均需灌入种子数据
+    # 场景：全新安装 / 旧数据库缺少分类（版本升级遗留）
+    user_count = db.execute('SELECT COUNT(*) FROM users').fetchone()[0]
+    cat_count  = db.execute('SELECT COUNT(*) FROM categories WHERE parent_id IS NULL').fetchone()[0]
+    if user_count == 0 or cat_count == 0:
         with open(os.path.join(sql_dir, 'seed.sql'), 'r', encoding='utf-8') as f:
             db.executescript(f.read())
         print('  → 已灌入种子数据（默认账号 admin / admin123）')
