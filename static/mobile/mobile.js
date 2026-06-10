@@ -59,14 +59,8 @@ const App = {
   _refreshCatTabs(){
     const inner = document.getElementById('m-cat-tabs');
     if(!inner || !this.cats.length) return;
-    // 如果 tab 里已经有分类项则不重复渲染
-    if(inner.querySelectorAll('.m-cat-tab').length > 1) return;
-    const existing = inner.querySelector('.m-cat-tab.active');
-    const activeCid = existing ? existing.dataset.cid : '';
-    inner.innerHTML = `
-      <div class="m-cat-tab ${!activeCid?'active':''}" data-cid="">全部</div>
-      ${this.cats.map(c=>`<div class="m-cat-tab ${activeCid==c.id?'active':''}" data-cid="${c.id}" title="${esc(c.name)}">${esc(c.name.slice(0,4))}</div>`).join('')}
-    `;
+    if(inner.querySelectorAll('.m-cat-tab').length > 0) return;
+    inner.innerHTML = this.cats.map(c=>`<div class="m-cat-tab" data-cid="${c.id}" title="${esc(c.name)}">${esc(c.name.slice(0,4))}</div>`).join('');
   },
 
   _flatCats(nodes, parent=null){
@@ -212,7 +206,6 @@ const App = {
           <i class="ti ti-bell m-topbar-icon"></i>
         </header>
         <nav class="m-cat-tabs" id="m-cat-tabs">
-          <div class="m-cat-tab active" data-cid="">全部</div>
           ${(this.cats||[]).map(c=>`<div class="m-cat-tab" data-cid="${c.id}" title="${esc(c.name)}">${esc(c.name.slice(0,4))}</div>`).join('')}
         </nav>
         <div class="m-sub-cat-bar" id="m-sub-cat-bar" style="display:none"></div>
@@ -229,18 +222,11 @@ const App = {
     // 若分类已加载则刷新 tab（处理 render 在分类加载前执行的情况）
     this._refreshCatTabs();
 
-    // 分类 tab 点击
+    // 分类 tab 点击 → 跳转到分类页并预选对应一级分类
     document.getElementById('m-cat-tabs').addEventListener('click',e=>{
       const tab=e.target.closest('.m-cat-tab');
-      if(!tab)return;
-      document.querySelectorAll('.m-cat-tab').forEach(t=>t.classList.remove('active'));
-      tab.classList.add('active');
-      this.activeCat = tab.dataset.cid ? parseInt(tab.dataset.cid) : null;
-      this.activeL2 = null;
-      this.activeL3 = null;
-      this._renderSubCatBar();
-      go('#/home');
-      this.viewHome();
+      if(!tab || !tab.dataset.cid)return;
+      go('#/cat?cid='+tab.dataset.cid);
     });
 
     // 底部导航
@@ -307,7 +293,7 @@ const App = {
     });
 
     if(h.startsWith('/home')) this.viewHome(page);
-    else if(h.startsWith('/cat')) this.viewCat(page);
+    else if(h.startsWith('/cat')) this.viewCat(page, h);
     else if(h.startsWith('/search')) this.viewSearch(page, h);
     else if(h.startsWith('/detail/')) this.viewDetail(page, h.replace('/detail/',''));
     else if(h.startsWith('/upload')) this.viewUpload(page);
@@ -508,12 +494,13 @@ const App = {
   /* ══════════════════════════════
      分类浏览
   ══════════════════════════════ */
-  async viewCat(page){
+  async viewCat(page, hash){
     page = page || document.getElementById('m-page');
     const roots = this.cats;
     if(!roots.length){ page.innerHTML='<div class="m-empty"><i class="ti ti-category"></i><span>暂无分类</span></div>'; return; }
 
-    let selL1 = roots[0];
+    const initCid = parseInt(new URLSearchParams((hash||'').split('?')[1]||'').get('cid')||'0');
+    let selL1 = (initCid && roots.find(c=>c.id===initCid)) || roots[0];
     let selL2 = null;  // id
     let selL3 = null;  // id
 
