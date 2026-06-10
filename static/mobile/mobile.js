@@ -512,7 +512,7 @@ const App = {
 
       let matHtml = '<div class="m-loading"><i class="ti ti-loader"></i>加载中…</div>';
       try{
-        const r = await API.materials.list({ cat_id: catId, page_size: 20, publish_status: 'online' });
+        const r = await API.materials.list({ category_id: catId, page_size: 20 });
         const items = r.items || r || [];
         matHtml = items.length
           ? items.map(m=>`
