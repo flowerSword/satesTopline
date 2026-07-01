@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首页 · PC 原型 · 售前头条</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="proto-bar">
+    <b>售前头条 · PC 原型</b><span class="tag">非真实数据</span>
+    <span class="sp"></span>
+    <a href="../index.html">← 原型首页</a>
+    <a href="home.html" class="active">首页</a>
+    <a href="materials.html">资料库</a>
+    <a href="detail.html">资料详情</a>
+    <a href="search.html">搜索结果</a>
+    <a href="admin.html">后台管理</a>
+  </div>
+
+  <div class="pc-page">
+    <div class="pc-topbar">
+      <div class="brand">📘 售前头条</div>
+      <div class="nav">
+        <a class="active">首页</a>
+        <a href="materials.html">资料库</a>
+        <a href="admin.html">资料管理</a>
+        <a>管理 ▾</a>
+      </div>
+      <div class="user">王</div>
+    </div>
+
+    <div class="pc-content">
+      <!-- KPI（仅管理员可见） -->
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="num">1,286</div><div class="lbl">资料总数</div></div>
+        <div class="kpi-card"><div class="num">42</div><div class="lbl">本月新增</div></div>
+        <div class="kpi-card"><div class="num">8,930</div><div class="lbl">累计下载</div></div>
+        <div class="kpi-card"><div class="num">356</div><div class="lbl">活跃用户</div></div>
+        <div class="kpi-card"><div class="num" style="color:var(--yellow)">7</div><div class="lbl">待审核</div></div>
+      </div>
+
+      <!-- 公告横幅 -->
+      <div class="card" style="margin-bottom:20px; display:flex; align-items:center; gap:10px; background:#FFFBEB; border:1px solid #FDE68A;">
+        <span class="badge yellow">重要</span>
+        <span style="font-size:13px;">《2026 年上半年行业解决方案模板》已更新，请各团队及时下载最新版本</span>
+      </div>
+
+      <!-- 搜索区 -->
+      <div class="pc-search-hero">
+        <div style="font-size:20px; font-weight:700;">找资料，从这里开始</div>
+        <div style="font-size:13px; opacity:.85; margin-top:4px;">已收录 1,286 份售前资料，支持关键词与 AI 语义检索</div>
+        <div class="pc-search-box">
+          <input placeholder="搜索方案、行业、产品关键词…" value="智慧园区 招投标">
+          <button class="ai-btn">✨ AI 智能检索</button>
+        </div>
+        <div style="margin-top:12px; font-size:12px; display:flex; gap:10px; opacity:.9;">
+          <span>热搜：</span>
+          <a style="text-decoration:underline;">智慧园区</a>
+          <a style="text-decoration:underline;">医疗行业方案</a>
+          <a style="text-decoration:underline;">投标模板</a>
+          <a style="text-decoration:underline;">产品彩页</a>
+        </div>
+      </div>
+
+      <div class="grid-2col" style="grid-template-columns:2fr 1fr;">
+        <div>
+          <!-- 7天热门 -->
+          <div class="card" style="margin-bottom:18px;">
+            <div class="tabs" style="margin-bottom:10px;">
+              <div class="tab active">全部</div>
+              <div class="tab">产品</div>
+              <div class="tab">方案</div>
+            </div>
+            <table>
+              <thead><tr><th style="width:36px;">#</th><th>资料名称</th><th>分类</th><th>下载量</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>智慧园区整体解决方案 V3.2.pptx</td><td>行业方案 / 政企</td><td>328</td></tr>
+                <tr><td>2</td><td>医疗行业信息化建设白皮书.pdf</td><td>行业方案 / 医疗</td><td>256</td></tr>
+                <tr><td>3</td><td>产品彩页合集 2026.pdf</td><td>产品资料 / 彩页</td><td>201</td></tr>
+                <tr><td>4</td><td>标准投标文件模板.docx</td><td>销售工具 / 模板</td><td>178</td></tr>
+                <tr><td>5</td><td>客户成功案例集锦.pptx</td><td>案例库 / 标杆</td><td>163</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- 最新动态 -->
+          <div class="card">
+            <h4 style="margin:0 0 12px;">最新资料动态</h4>
+            <div class="mat-grid">
+              <div class="mat-card"><div class="ico">📊</div><div class="title">2026 智慧交通解决方案.pptx</div><div class="meta"><span>行业方案</span><span>2 小时前</span></div></div>
+              <div class="mat-card"><div class="ico">📄</div><div class="title">产品功能对比表.xlsx</div><div class="meta"><span>产品资料</span><span>5 小时前</span></div></div>
+              <div class="mat-card"><div class="ico">🎬</div><div class="title">客户案例宣传片.mp4</div><div class="meta"><span>案例库</span><span>昨天</span></div></div>
+              <div class="mat-card"><div class="ico">📕</div><div class="title">售前话术手册 V2.pdf</div><div class="meta"><span>销售工具</span><span>2 天前</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- 置顶推荐 -->
+          <div class="card" style="margin-bottom:18px;">
+            <h4 style="margin:0 0 12px;">📌 管理员置顶推荐</h4>
+            <div class="mat-card" style="margin-bottom:10px;"><div class="ico">📊</div><div class="title">2026 年度产品战略手册.pptx</div><div class="meta"><span>产品资料</span><span>置顶</span></div></div>
+            <div class="mat-card"><div class="ico">📄</div><div class="title">标准报价单模板.xlsx</div><div class="meta"><span>销售工具</span><span>置顶</span></div></div>
+          </div>
+          <!-- 智能推荐 -->
+          <div class="card">
+            <h4 style="margin:0 0 12px;">✨ 智能推荐</h4>
+            <div class="mat-card" style="margin-bottom:10px;"><div class="ico">📄</div><div class="title">政企行业售前 FAQ 汇总.pdf</div><div class="meta"><span>相关度 92%</span></div></div>
+            <div class="mat-card"><div class="ico">📊</div><div class="title">竞品对比分析报告.pptx</div><div class="meta"><span>相关度 87%</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

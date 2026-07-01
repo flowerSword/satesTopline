@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的 · 手机端原型 · 售前头条</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="proto-bar">
+    <b>售前头条 · 手机端原型</b><span class="tag">非真实数据</span>
+    <span class="sp"></span>
+    <a href="../index.html">← 原型首页</a>
+    <a href="home.html">首页</a>
+    <a href="category.html">分类浏览</a>
+    <a href="detail.html">资料详情</a>
+    <a href="search.html">搜索</a>
+    <a href="profile.html" class="active">我的</a>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="m-scroll" style="background:var(--g50);">
+          <div class="m-profile-hero">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.25); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700;">王</div>
+              <div>
+                <div style="font-size:15px; font-weight:700;">王芳</div>
+                <div style="font-size:11.5px; opacity:.85; margin-top:2px;">销售一部 · 业务用户</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="m-profile-card">
+            <div><b style="display:block; font-size:16px;">18</b><span style="font-size:11px; color:var(--g500);">我的上传</span></div>
+            <div><b style="display:block; font-size:16px;">42</b><span style="font-size:11px; color:var(--g500);">下载记录</span></div>
+            <div><b style="display:block; font-size:16px;">9</b><span style="font-size:11px; color:var(--g500);">我的收藏</span></div>
+          </div>
+
+          <div style="margin:16px 12px 0; border-radius:12px; overflow:hidden; box-shadow:var(--shadow);">
+            <a href="detail.html"><div class="m-menu-item">📤 我的上传 <span class="arrow">›</span></div></a>
+            <a href="detail.html"><div class="m-menu-item">⬇ 下载记录 <span class="arrow">›</span></div></a>
+            <a href="detail.html"><div class="m-menu-item">🕓 浏览历史 <span class="arrow">›</span></div></a>
+            <a href="detail.html"><div class="m-menu-item">☆ 我的收藏 <span class="arrow">›</span></div></a>
+          </div>
+
+          <div style="margin:12px 12px 0; border-radius:12px; overflow:hidden; box-shadow:var(--shadow);">
+            <div class="m-menu-item">🔔 消息通知 <span class="arrow">›</span></div>
+            <div class="m-menu-item">💬 意见反馈 <span class="badge gray" style="margin-left:6px;">开发中</span><span class="arrow">›</span></div>
+            <div class="m-menu-item">🔒 修改密码 <span class="arrow">›</span></div>
+          </div>
+
+          <div style="margin:16px 12px 20px; text-align:center; font-size:12.5px; color:var(--red); padding:12px; background:#fff; border-radius:12px; box-shadow:var(--shadow);">
+            退出登录
+          </div>
+        </div>
+
+        <div class="m-tabbar">
+          <a class="it" href="home.html"><span class="ic">🏠</span>首页</a>
+          <a class="it" href="category.html"><span class="ic">📂</span>分类</a>
+          <a class="it upload"><span class="ic">＋</span></a>
+          <a class="it" href="profile.html"><span class="ic">☆</span>收藏</a>
+          <a class="it active" href="profile.html"><span class="ic">👤</span>我的</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

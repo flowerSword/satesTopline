@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>售前头条 SalesTopline · 原型图</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  header.hero{background:linear-gradient(135deg,#1D4ED8,#2563EB); color:#fff; padding:44px 24px 36px; text-align:center;}
+  header.hero h1{margin:0 0 8px; font-size:26px;}
+  header.hero p{margin:0; opacity:.85; font-size:13px;}
+  .wrap{max-width:1100px; margin:0 auto; padding:32px 24px 80px;}
+  .group h2{font-size:17px; margin:0 0 4px; display:flex; align-items:center; gap:8px;}
+  .group .sub{font-size:12.5px; color:var(--g500); margin:0 0 16px;}
+  .group{margin-bottom:40px;}
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;}
+  .proto-card{background:#fff; border-radius:12px; box-shadow:var(--shadow); padding:18px; display:flex; flex-direction:column; gap:8px;}
+  .proto-card:hover{box-shadow:var(--shadow-lg); transform:translateY(-2px); transition:.15s;}
+  .proto-card .emoji{font-size:26px;}
+  .proto-card .name{font-weight:700; font-size:14px;}
+  .proto-card .desc{font-size:12px; color:var(--g500); line-height:1.5; flex:1;}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:6px;}
+  .dot.pc{background:var(--blue);}
+  .dot.m{background:var(--m-blue);}
+  footer{text-align:center; font-size:12px; color:var(--g500); padding-bottom:40px;}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <h1>售前头条 SalesTopline · 高保真原型图</h1>
+    <p>基于 <a href="../UCD.html" style="color:#fff;text-decoration:underline;">UCD 设计文档</a> 制作 · 电脑端 / 手机端核心页面 · 页面间可点击跳转 · 示例数据仅供演示</p>
+  </header>
+  <div class="wrap">
+    <div class="group">
+      <h2><span class="dot pc"></span>电脑端（PC）</h2>
+      <p class="sub">面向办公场景，顶部导航 + 后台管理能力，主色 #2563EB</p>
+      <div class="cards">
+        <a class="proto-card" href="pc/home.html">
+          <div class="emoji">🏠</div>
+          <div class="name">首页</div>
+          <div class="desc">KPI 看板、搜索 + AI 检索入口、热门榜、推荐区、最新动态</div>
+        </a>
+        <a class="proto-card" href="pc/materials.html">
+          <div class="emoji">🗂️</div>
+          <div class="name">资料库</div>
+          <div class="desc">左侧分类树 + 格式/标签筛选，卡片网格列表</div>
+        </a>
+        <a class="proto-card" href="pc/detail.html">
+          <div class="emoji">📄</div>
+          <div class="name">资料详情</div>
+          <div class="desc">文件预览、简介、统计数据、版本历史、反馈表单</div>
+        </a>
+        <a class="proto-card" href="pc/search.html">
+          <div class="emoji">🔍</div>
+          <div class="name">搜索结果</div>
+          <div class="desc">关键词 / AI 语义双模式切换，相关度展示</div>
+        </a>
+        <a class="proto-card" href="pc/admin.html">
+          <div class="emoji">🛠️</div>
+          <div class="name">资料管理（后台）</div>
+          <div class="desc">状态 Tab 筛选、审核 / 上下架 / 置顶等行内操作</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2><span class="dot m"></span>手机端（Mobile）</h2>
+      <p class="sub">面向移动查阅场景，底部 Tab + 卡片流，主色 #1B4FBB</p>
+      <div class="cards">
+        <a class="proto-card" href="mobile/home.html">
+          <div class="emoji">🏠</div>
+          <div class="name">首页</div>
+          <div class="desc">一级分类 Tab、搜索 + AI 检索、热门榜、推荐、最新动态</div>
+        </a>
+        <a class="proto-card" href="mobile/category.html">
+          <div class="emoji">📂</div>
+          <div class="name">分类浏览</div>
+          <div class="desc">左侧一级分类竖栏 + 二/三级 Chip 筛选</div>
+        </a>
+        <a class="proto-card" href="mobile/detail.html">
+          <div class="emoji">📄</div>
+          <div class="name">资料详情</div>
+          <div class="desc">元信息、简介、统计，底部固定下载/收藏/分享操作栏</div>
+        </a>
+        <a class="proto-card" href="mobile/search.html">
+          <div class="emoji">🔍</div>
+          <div class="name">搜索</div>
+          <div class="desc">热搜标签 + 关键词/AI 语义结果，相关度徽标</div>
+        </a>
+        <a class="proto-card" href="mobile/profile.html">
+          <div class="emoji">👤</div>
+          <div class="name">我的</div>
+          <div class="desc">个人信息卡、数据统计、功能菜单入口</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <footer>售前头条 SalesTopline · 原型图仅用于设计评审，不含真实业务逻辑</footer>
+</body>
+</html>

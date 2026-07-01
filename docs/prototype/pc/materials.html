@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资料库 · PC 原型 · 售前头条</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="proto-bar">
+    <b>售前头条 · PC 原型</b><span class="tag">非真实数据</span>
+    <span class="sp"></span>
+    <a href="../index.html">← 原型首页</a>
+    <a href="home.html">首页</a>
+    <a href="materials.html" class="active">资料库</a>
+    <a href="detail.html">资料详情</a>
+    <a href="search.html">搜索结果</a>
+    <a href="admin.html">后台管理</a>
+  </div>
+
+  <div class="pc-page">
+    <div class="pc-topbar">
+      <div class="brand">📘 售前头条</div>
+      <div class="nav">
+        <a href="home.html">首页</a>
+        <a class="active">资料库</a>
+        <a href="admin.html">资料管理</a>
+        <a>管理 ▾</a>
+      </div>
+      <div class="user">王</div>
+    </div>
+
+    <div class="pc-content">
+      <div class="grid-2col">
+        <!-- 分类树 -->
+        <div>
+          <div class="pc-tree" style="margin-bottom:14px;">
+            <div class="node active">全部分类</div>
+            <div class="node">行业方案 <span style="color:var(--g500);">▾</span></div>
+            <div class="node l2">政企</div>
+            <div class="node l2">医疗</div>
+            <div class="node l2">教育</div>
+            <div class="node">产品资料 <span style="color:var(--g500);">▾</span></div>
+            <div class="node l2 active">产品彩页</div>
+            <div class="node l2">功能白皮书</div>
+            <div class="node">销售工具</div>
+            <div class="node">案例库</div>
+          </div>
+          <div class="pc-tree">
+            <div style="font-size:12px; color:var(--g500); padding:4px 10px 8px;">文件格式</div>
+            <div class="chip-row" style="padding:0 8px 8px;">
+              <span class="chip active">PDF</span><span class="chip">DOCX</span><span class="chip">XLSX</span>
+              <span class="chip">PPTX</span><span class="chip">ZIP</span><span class="chip">MP4</span><span class="chip">PNG</span>
+            </div>
+            <div style="font-size:12px; color:var(--g500); padding:4px 10px 8px;">标签 · 行业</div>
+            <div class="chip-row" style="padding:0 8px 12px;">
+              <span class="chip">政企</span><span class="chip active">医疗</span><span class="chip">教育</span><span class="chip">金融</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 主区 -->
+        <div>
+          <div class="filter-bar">
+            <input placeholder="搜索资料标题…" style="flex:1;">
+            <select><option>最新发布</option><option>最多查看</option><option>最多下载</option></select>
+            <button class="btn btn-primary">＋ 上传资料</button>
+          </div>
+
+          <div class="mat-grid">
+            <div class="mat-card"><div class="ico">📊</div><div class="title">智慧医疗信息化整体方案.pptx</div><div class="tags"><span class="badge blue">医疗</span><span class="badge gray">方案</span></div><div class="meta"><span>👁 328 · ⬇ 156</span><span>2026-06-28</span></div></div>
+            <div class="mat-card"><div class="ico">📄</div><div class="title">三甲医院信息化建设白皮书.pdf</div><div class="tags"><span class="badge blue">医疗</span></div><div class="meta"><span>👁 201 · ⬇ 98</span><span>2026-06-25</span></div></div>
+            <div class="mat-card"><div class="ico">📕</div><div class="title">医疗行业售前话术手册.pdf</div><div class="tags"><span class="badge blue">医疗</span><span class="badge gray">工具</span></div><div class="meta"><span>👁 156 · ⬇ 71</span><span>2026-06-20</span></div></div>
+            <div class="mat-card"><div class="ico">📈</div><div class="title">医疗行业客户案例合集.xlsx</div><div class="tags"><span class="badge blue">医疗</span><span class="badge gray">案例</span></div><div class="meta"><span>👁 132 · ⬇ 64</span><span>2026-06-18</span></div></div>
+            <div class="mat-card"><div class="ico">🖼️</div><div class="title">医疗产品彩页 2026 春季版.png</div><div class="tags"><span class="badge blue">医疗</span></div><div class="meta"><span>👁 98 · ⬇ 40</span><span>2026-06-15</span></div></div>
+            <div class="mat-card"><div class="ico">📊</div><div class="title">互联网医院建设招标应答范本.pptx</div><div class="tags"><span class="badge blue">医疗</span><span class="badge gray">投标</span></div><div class="meta"><span>👁 87 · ⬇ 39</span><span>2026-06-10</span></div></div>
+            <div class="mat-card"><div class="ico">📄</div><div class="title">区域医疗云平台产品说明书.pdf</div><div class="tags"><span class="badge blue">医疗</span></div><div class="meta"><span>👁 76 · ⬇ 30</span><span>2026-06-08</span></div></div>
+            <div class="mat-card"><div class="ico">🎬</div><div class="title">智慧医院案例宣传片.mp4</div><div class="tags"><span class="badge blue">医疗</span><span class="badge gray">案例</span></div><div class="meta"><span>👁 65 · ⬇ 22</span><span>2026-06-02</span></div></div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:6px; margin-top:20px; font-size:13px;">
+            <span class="btn btn-secondary sm">‹ 上一页</span>
+            <span class="btn btn-primary sm">1</span>
+            <span class="btn btn-secondary sm">2</span>
+            <span class="btn btn-secondary sm">3</span>
+            <span class="btn btn-secondary sm">下一页 ›</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

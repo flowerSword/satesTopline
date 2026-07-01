@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资料管理（后台） · PC 原型 · 售前头条</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="proto-bar">
+    <b>售前头条 · PC 原型</b><span class="tag">非真实数据</span>
+    <span class="sp"></span>
+    <a href="../index.html">← 原型首页</a>
+    <a href="home.html">首页</a>
+    <a href="materials.html">资料库</a>
+    <a href="detail.html">资料详情</a>
+    <a href="search.html">搜索结果</a>
+    <a href="admin.html" class="active">后台管理</a>
+  </div>
+
+  <div class="pc-page">
+    <div class="pc-topbar">
+      <div class="brand">📘 售前头条</div>
+      <div class="nav">
+        <a href="home.html">首页</a>
+        <a href="materials.html">资料库</a>
+        <a class="active">资料管理</a>
+        <a>管理 ▾</a>
+      </div>
+      <div class="user">管</div>
+    </div>
+
+    <div class="pc-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="margin:0; font-size:18px;">资料管理</h2>
+        <button class="btn btn-secondary">⟳ 重建 AI 索引</button>
+      </div>
+
+      <div class="tabs">
+        <div class="tab">全部</div>
+        <div class="tab active">待审核 <span class="badge yellow" style="margin-left:4px;">7</span></div>
+        <div class="tab">已发布</div>
+        <div class="tab">已驳回</div>
+        <div class="tab">已下架</div>
+        <div class="tab">已归档</div>
+      </div>
+
+      <div class="filter-bar">
+        <input placeholder="搜索资料标题…" style="flex:1;">
+        <select><option>全部分类</option><option>行业方案</option><option>产品资料</option></select>
+        <select><option>全部格式</option><option>PDF</option><option>PPTX</option></select>
+      </div>
+
+      <div class="card" style="padding:0; overflow:hidden;">
+        <table>
+          <thead>
+            <tr><th>资料名称</th><th>分类</th><th>上传人</th><th>提交时间</th><th>审核状态</th><th>发布状态</th><th style="width:220px;">操作</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>智慧交通信号优化方案.pptx</td><td>行业方案/交通</td><td>孙丽</td><td>2026-07-01 09:20</td>
+              <td><span class="badge yellow">待审核</span></td><td><span class="badge gray">草稿</span></td>
+              <td><button class="btn btn-primary sm">通过</button> <button class="btn btn-secondary sm">驳回</button> <button class="btn btn-ghost sm">查看</button></td>
+            </tr>
+            <tr>
+              <td>金融行业风控产品彩页.pdf</td><td>产品资料/彩页</td><td>周涛</td><td>2026-06-30 16:44</td>
+              <td><span class="badge yellow">待审核</span></td><td><span class="badge gray">草稿</span></td>
+              <td><button class="btn btn-primary sm">通过</button> <button class="btn btn-secondary sm">驳回</button> <button class="btn btn-ghost sm">查看</button></td>
+            </tr>
+            <tr>
+              <td>教育行业信息化白皮书 V2.docx</td><td>行业方案/教育</td><td>吴静</td><td>2026-06-30 11:05</td>
+              <td><span class="badge yellow">待审核</span></td><td><span class="badge gray">草稿</span></td>
+              <td><button class="btn btn-primary sm">通过</button> <button class="btn btn-secondary sm">驳回</button> <button class="btn btn-ghost sm">查看</button></td>
+            </tr>
+            <tr>
+              <td>智慧医疗信息化整体解决方案 V3.2.pptx</td><td>行业方案/医疗</td><td>李伟</td><td>2026-06-28 14:10</td>
+              <td><span class="badge green">已通过</span></td><td><span class="badge green">已上线</span></td>
+              <td><button class="btn btn-secondary sm">置顶</button> <button class="btn btn-secondary sm">下架</button> <button class="btn btn-ghost sm">编辑</button></td>
+            </tr>
+            <tr>
+              <td>2025 年旧版产品手册.pdf</td><td>产品资料/白皮书</td><td>系统管理员</td><td>2025-11-02 10:00</td>
+              <td><span class="badge green">已通过</span></td><td><span class="badge gray">已归档</span></td>
+              <td><button class="btn btn-secondary sm">重新上架</button> <button class="btn btn-ghost sm">查看</button></td>
+            </tr>
+            <tr>
+              <td>某竞对产品对比表（内部草稿）.xlsx</td><td>销售工具/内部</td><td>陈刚</td><td>2026-06-27 09:30</td>
+              <td><span class="badge red">已驳回</span></td><td><span class="badge gray">草稿</span></td>
+              <td><button class="btn btn-ghost sm">查看驳回原因</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:6px; margin-top:20px; font-size:13px;">
+        <span class="btn btn-secondary sm">‹ 上一页</span>
+        <span class="btn btn-primary sm">1</span>
+        <span class="btn btn-secondary sm">2</span>
+        <span class="btn btn-secondary sm">下一页 ›</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
